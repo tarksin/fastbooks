@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+              <h2>Expense categories</h2>
+              <table  class="table table-sm">
+                {% for expcat in expcats %}
+                <tr>
+                  <td>{{expcat.id}}</td>
+                  <td>{{expcat.expcat}}</td>
+                </tr>
+                  {% endfor %}
+              <table>
+
+
+                <img src="{{ url_for('static', filename='img/spacer.svg') }}" height="50" alt="spacer">
+
+                <h2>Add Category</h2>
+                  <form action="" method="POST">
+                              {{ form.hidden_tag() }}
+
+                            <table>
+                                <tr>
+                                    <td><img src="{{ url_for('static', filename='img/spacer.svg') }}" width="15" alt="spacer"> </td>
+                                    <td align='right'>  {{ form.id.label }}   </td>
+                                    <td>  {{ form.id}}  </td>
+                                </tr>
+
+                                <tr>
+
+                                  <td> </td>
+                                  <td>  {{ form.expcat.label }}   </td>
+                                  <td>  {{ form.expcat}}          </td>
+                                </tr>
+
+                                <tr>
+                                  <td></td>
+                                    <td></td>
+                                    <td> {{ form.submit() }}  </td>
+                                </tr>
+                            </table>
+
+                          </form>
+
+
+{% endblock %}

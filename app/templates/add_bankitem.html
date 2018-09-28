@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Add Bankitem</h2>
+    <form action="" method="POST">
+                {{ form.hidden_tag() }}
+
+                <table>
+                    <tr>
+
+                        <td><img src="{{ url_for('static', filename='img/spacer.svg') }}" width="15" alt="spacer"> </td>
+                        <td align='right'>  {{ form.bi_date.label }}   </td>
+                        <td>  {{ form.bi_date}}          </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align='right'> {{ form.bank_id.label }} </td>
+                        <td> {{ form.bank_id}}        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align='right'>{{form.bi_amount.label }}  </td>
+                        <td>{{ form.bi_amount}}       </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align='right'>{{form.vendor.label }}  </td>
+                        <td>{{ form.vendor}}       </td>
+                    </tr>
+
+                    <tr>
+                      <td><img src="{{ url_for('static', filename='img/spacer.svg') }}" width="15" alt="spacer"> </td>
+                      <td><img src="{{ url_for('static', filename='img/spacer.svg') }}" width="15" alt="spacer"></td>
+                        <td>{{ form.submit() }}   </td>
+                    </tr>
+                </table>
+            </form>
+
+{% endblock %}

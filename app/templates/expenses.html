@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+              <h2>Expenses</h2>
+              <table class="table table-sm">
+                {% for expense in expense_list %}
+                <tr>
+                  <td>{{expense.expense_id}}</td>
+                  <td>{{expense.expdate}}</td>
+                  <td> {{expense.expdesc}}</td>
+                  <td> {{expense.expamount}}</td>
+                  <td> {{expense.vendor}}</td>
+                  <td> {{expense.expcat}}</td>
+                </tr>
+                  {% endfor %}
+              <table>
+
+
+
+
+                <img src="{{ url_for('static', filename='img/spacer.svg') }}" height="50" alt="spacer">
+
+
+            <h2>Bankitems</h2>
+            <table  class="table table-sm">
+              {% for bankitem in bankitems %}
+              <tr>
+                <td> {{bankitem.bankitem_id}}</td>
+                <td> {{bankitem.bank_id}}</td>
+                <td> {{bankitem.bi_date}}</td>
+                <td> {{bankitem.bi_amount}}</td>
+                <td> {{bankitem.vendor}}</td>
+                {% endfor %}
+            <table>
+
+
+
+{% endblock %}
