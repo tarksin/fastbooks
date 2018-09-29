@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, jsonify, request
 from flask_login import current_user, login_user, logout_user
-from app.models import User, Expense, BankItem, Expcat, Todo
+from app.models import User, Expense, BankItem, Expcat, Todo, Project
 from app import app
-from app.forms import LoginForm, AddExpenseForm, AddBankItemForm, AddExpcatForm, AddTodoForm
+from app.forms import LoginForm, AddExpenseForm, AddBankItemForm, AddExpcatForm, AddTodoForm, AddProjectForm
 import pymysql.cursors
 import pymysql
 # import maxxDB
@@ -50,27 +50,66 @@ def expcats():
 
     return render_template('expcats.html', form=form, expcats=expcats, header_text="Expense categories")
 
+#---------------------- add_todo  ------------------------------------
+# @app.route('/add_todo', methods=["GET","POST"])
+# def todo():
+#     add_todo_form = AddTodoForm(request.form)
+    #add_project_form = AddProjectForm()
+    # todos = Todo.get_todos()
+    # if request.method== 'POST':
+    #     t = Todo(
+    #         request.form['todo'], request.form['project_id']
+    #          )
+    #     t.create()
+    #     return redirect(url_for ('todo'))
+
+    # return render_template('test.html',  testdata = "Testing add_todo 65")
+
+
+
 #--------------------  /todo         -----------------------------------
-@app.route('/todo', methods=["GET", "POST"])
+@app.route('/todo', methods=["GET","POST"])
 def todo():
-    form = AddTodoForm()
+    # if user logged in ...
+    #add_todo_form = AddTodoForm()
+    project_form = AddProjectForm(formname='project_form')
+    add_todo_form = AddTodoForm(formname='todo_form')
+
     todos = Todo.get_todos()
-    if request.method== 'POST':
-        t = Todo(
-            request.form['todo'], request.form['project_id']
-             )
-        t.create()
-        return redirect(url_for ('todo'))
+    projects = Project.get_projects()
 
-    return render_template('todo.html', form=form, header_text="to-do", todos=todos)
+    if  request.method == 'POST':
+    #    return redirect(url_for ('xxxxxxtodotodo'))
+        x = request.form['formname']
+
+        if x == 'project_form':
+            p = Project( request.form['project']
+                )
+            p.create()
+            todos = Todo.get_todos()
+            projects = Project.get_projects()
+
+            return render_template('todo.html', todo_form=add_todo_form, project_form=project_form, header_text = x,
+                                                todos=todos, projects=projects)
 
 
-    # todos = [{'project':'fastbooks','items':['Thing One','Thing Two','Thing Three']},
-    #     {'project':'sdc','items':['Thing One','Thing Two','Thing Three']},
-    #     {'project':'IBM Business Analysis','items':['Thing One','Thing Two','Thing Three']},
-    #     {'project':'Udemy ProPython flask','items':['Thing One','Thing Two','Thing Three']},
-    #     {'project':'Coursera Data Science','items':['Thing One','Thing Two','Thing Three']}
-    #     ]
+        elif x == 'todo_form':
+            #td = request.form['todo']
+            t = Todo(
+                request.form['todo'], request.form['project_id']
+                )
+            t.create()
+            todos = Todo.get_todos()
+            projects = Project.get_projects()
+            return render_template('todo.html', todo_form=add_todo_form, project_form=project_form, header_text = x,
+                                                todos=todos, projects=projects)
+
+#    add_project_form = AddProjectForm()
+#  projectform=AddProjectForm,
+    return render_template('todo.html', todo_form=add_todo_form, project_form=project_form,  header_text="GET /todo()",
+                                        todos=todos, projects=projects)
+#------------------------------------------------------------------------
+
 #--------------------  /add_expense         -----------------------------------
 @app.route('/add_expense', methods=["GET","POST"])
 def add_expense():

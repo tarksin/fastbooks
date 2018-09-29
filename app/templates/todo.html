@@ -1,48 +1,90 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-    <div class="card-deck">
-      {% for group in todos|groupby('project') %}
-      <!-- <p>0:  {{ group }}</p>
-      <h4>1:  {{ group[0] }}</h4>
-      <h6>2:  {{ group[1] }}</h6>
-      <h3>3:  {{ group[1][0]['pid'] }}</h3> -->
+<div class="card-deck">
+  {% for group in todos|groupby('project') %}
+  <!-- <p>0:  {{ group }}</p>
+  <h4>1:  {{ group[0] }}</h4>
+  <h6>2:  {{ group[1] }}</h6>
+  <h3>3:  {{ group[1][0]['pid'] }}</h3> -->
 
-      <div class="card text-black bg-success mb-3" style="max-width: 18rem;">
-        <div class="card-body">
-          <h3  style="font-color: black; font-style: bold; text-align: center;">{{ group.grouper}}  {{group[1][0]['pid']}}</h3>
-          <hr>
-          <ul>
-              {% for item in group.list %}
-            <li class="card-text" style="line-height: 1.2em;">{{ item.todo }}</l1>
-              {% endfor %}
-          </ul>
-        </div>
-      </div>
+  <div class="card text-black bg-success mb-3" style="max-width: 18rem;">
+    <div class="card-body">
+      <h6  style="font-color: black; font-style: bold; text-align: center;">{{ group.grouper}} </h6>
+      <!-- { { group[1] [0][ 'pid'] }  } -->
+      <hr>
+          {% for item in group.list %}
+        <p class="card-text" style="line-height: 1em; font-size: .8em;">{{ item.todo }}</p>
+          {% endfor %}
 
-      {% endfor %}
-   </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
 
 
-    <img src="{{ url_for('static', filename='img/spacer.svg') }}" height="50" alt="spacer">
+<img src="{{ url_for('static', filename='img/spacer.svg') }}" height="150" alt="spacer">
 
-    <h2>Add task</h2>
-      <form action="" method="POST">
+<br>
+<hr>
+<br>
 
-                  {{ form.hidden_tag() }}
-                <table>
-                      <tr>
-                        <td> </td>
-                        <td>  {{ form.todo.label }}   </td>
-                        <td>  {{ form.todo}}          </td>
-                        <td>  {{ form.project_id}}</td>
-                      </tr>
-                      <tr>
-                        <td></td>
+      <h2>{{ testdata }}</h2>
+      <h2>Add task</h2>
+        <form  action="" method="POST">
+            {{ todo_form.hidden_tag() }}
+            {{ project_form.formname}}
+                  <table>
+                        <tr>
+                          <td> </td>
+                          <td>  {{ todo_form.todo.label }}   </td>
+                          <td>  {{ todo_form.todo}}          </td>
+                          <td>  {{ todo_form.project_id(placeholder='project_id')}}</td>
+                        </tr>
+                        <tr>
                           <td></td>
-                          <td> {{ form.submit() }}  </td>
-                      </tr>
-                  </table>
-              </form>
+                            <td></td>
+                            <td> {{ todo_form.submit() }}  </td>
+                        </tr>
+                    </table>
+                </form>
+
+<br>
+<hr>
+<br>
+      <h2>Add project</h2>
+        <form  action="todo" method="POST">
+            {{ project_form.hidden_tag() }}
+            {{ project_form.formname}}
+                  <table>
+                        <tr>
+                          <td> </td>
+                          <td>  {{ project_form.project.label }}   </td>
+                          <td>  {{ project_form.project}}          </td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                            <td></td>
+                            <td> {{ project_form.submit() }}  </td>
+                        </tr>
+                    </table>
+                </form>
+
+
+<br>
+<hr>
+<br>
+                <h2>Projects</h2>
+                <table  class="table table-sm">
+                  {% for p in projects %}
+                  <tr>
+                    <td> {{p.id}} </td>
+                    <td> {{p.project}}</td>
+                    {% endfor %}
+                <table>
+
+
 
 {% endblock %}

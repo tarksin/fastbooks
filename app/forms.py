@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, IntegerField, FloatField, DateField, SelectField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, IntegerField, FloatField, DateField, SelectField, SubmitField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 
@@ -24,10 +24,25 @@ class AddExpcatForm(FlaskForm):
     submit = SubmitField('Save')
 
 class AddTodoForm(FlaskForm):
+    formname =HiddenField('formname')
     id = IntegerField('id', validators=[DataRequired()])
     todo = StringField('Item', validators=[DataRequired()])
     project_id = IntegerField('project_id', validators=[DataRequired()])
     submit = SubmitField('Save')
+
+class AddProjectForm(FlaskForm):
+    # id = IntegerField('id', validators=[DataRequired()])
+    # expcat = StringField('expcat', validators=[DataRequired()])
+    # submit = SubmitField('Save')
+#    id = IntegerField('id', validators=[DataRequired()])
+    formname =HiddenField('formname')
+    project = StringField('Item', validators=[DataRequired()])
+    submit = SubmitField('Save')
+
+# class AddProjectForm(FlaskForm):
+#     id = IntegerField('id', validators=[DataRequired()])
+#     project = StringField('Item', validators=[DataRequired()])
+#     submit = SubmitField('Save')
 
 
 class AddBankItemForm(FlaskForm):

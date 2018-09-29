@@ -90,6 +90,43 @@ class Todo():
             connection.close()
         return result
 
+#---------------------class PROJECT ----------------------------------------------
+
+class Project():
+    '''class representing a project as optional attribute of an expense'''
+
+    def __init__(self, project):
+        self.id = id
+        self.project = project
+
+    def create(self):
+        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        try:
+            with connection.cursor() as cursor:
+                sql = "INSERT INTO projects( project) values (%s)"
+                cursor.execute(sql,( self.project))
+                connection.commit()
+        finally:
+            connection.close()
+
+    @classmethod
+    def get_projects(cls):
+        projects = []
+        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        try:
+            with connection.cursor() as cursor:
+                #sql = "SELECT id, todo FROM todo ORDER BY id" # WHERE  username='{}'".format(username)
+                sql = "select id, project from projects order by id "
+
+                cursor.execute(sql)
+                result = cursor.fetchall()
+        finally:
+            connection.close()
+        return result
+
+
 
 #---------------------class EXPCAT ----------------------------------------------
 
