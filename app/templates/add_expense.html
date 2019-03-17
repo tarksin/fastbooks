@@ -5,8 +5,7 @@
   <h2>Add expense</h2>
     <form action="" method="POST">
                 {{ form.hidden_tag() }}
-
-<table>
+        <table>
             <tr>
 
               <td><img src="{{ url_for('static', filename='img/spacer.svg') }}" width="15" alt="spacer"> </td>
@@ -46,5 +45,12 @@
 
             </form>
 <hr>
+<h6>Sales tax:</h6>
+<select class="" name="taxes">
+{% for t in taxes %}
+  <option value="{{t}}">{{t}}</option>
+{% endfor%}
+</select>
+
 <br>
 {% endblock %}

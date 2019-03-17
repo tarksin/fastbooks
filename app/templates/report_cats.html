@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Report results</h2>
+
+              {% if cats %}
+
+                            <h2>Expenses by category</h2>
+                            <table class="table table-sm">
+                              {% for cat in cats %}
+                              <tr>
+                                <td> {{cat.cat}}</td>
+                                <td style="text-align:right;"> {{'%10.2f'|format(cat.total|float)}}</td>
+                                
+                              </tr>
+                                {% endfor %}
+                            <table>
+
+              {% endif %}
+
+{% endblock %}

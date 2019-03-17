@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Waddya know</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Tinos" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+
+      <header>
+        <h6>
+          image source:
+          <a href="https://premier.shutterstock.com/image/contributor/3601496" target="_blank">Ryzhi
+          </a> via Shutterstock
+        </h6>
+
+        <img  id="top" class="docimage" src="https://img.deusm.com/darkreading/1331840_Slideshow/Slide1CoverArt.jpg"
+          alt="Image Source: Ryzhi via Shutterstock" display="inline-block" height = "200" width="600" border="0">
+
+
+        <h1 id="mainhead"> Data Science</h1>
+        <h3>It's all about the art</h3>
+        <small>
+          <blockquote cite="http://www.paulgraham.com/knuth.html">
+            "Science is knowledge that we understand so well that we can teach it to a computer; <br>and if we don't fully understand something, it is an art to deal with it."
+            <br><cite>--Donald Knuth, Computer Programming as an Art</cite>
+          </blockquote>
+        </small>
+      </header>
+      <hr>
+
+  <!-- <img src="d41586-018-02174-z_15474156.jpg" alt=""> -->
+      <img style="float: left; padding-right: 15px" src="https://media.nature.com/w800/magazine-assets/d41586-018-02174-z/d41586-018-02174-z_15474156.jpg"
+          height="300"  alt="">
+<br>
+      <article>
+      <h4>Article:</h4>
+To put things into perspective, <br>one exabyte (10^18) of data <br>
+is created on the internet daily, <br>amounting to roughly the equivalent<br>
+of data in 250 million DVDs. Humankind <br>produces in two days the same amount<br>
+of data it took from the dawn of <br>civilization until 2003 to generate, and <br>
+as the Internet of Things becomes a <br>reality and more physical objects<br>
+become connected to the internet, we will <br>enter the Brontobyte (10^27) Era.<br>
+<br><br>
+
+      </article>
+<hr>
+<br>
+<p class="hanging-indent"><span class="hanging-dropcap">S</span>
+
+          cholars continue to contest the methods used in the emerging field that encompasses analytics, big
+    data, business intelligence, computational prediction, and data science. The standard methods for
+    analytics projects that use large data sets are statistical modeling and algorithms. Quantitative methods
+    have been reliably consistent for structured quantitative data, yet the many unstructured data sets that
+    feed analytics are different. Their underlying observations are subject to change in ways the researcher
+    cannot determine. The need to interpret and contextualize data is an essential but rarely discussed
+    aspect of analytics. Google Flu Trends illustrates the role of interpretation
+    in data analytics. The increasingly skewed flu predictions were due, in part, to the researchers' failure to
+    interpret the reliability of their data sources.</p>
+
+
+      <p>Interpretation is central to naturalistic forms of inquiry. Naturalistic inquiry stems from ethnography, field work or observations of uncontrolled environments where an objective truth
+ cannot be assumed. Rubin and Rubin, in "Qualitative Interviewing: The Art of
+Hearing Data," describe naturalistic inquiry as the generation of data through encounters between
+participant and researcher. Considering analytics from a naturalistic perspective is in direct opposition to
+its more common association with quantitative scientific methods.
+The most significant difference is that the naturalistic researcher generates data and serves as the sole
+research instrument. However, both analytics and naturalistic researchers select from a range of found
+data they happen to encounter. Additionally, the reduction of large collections of words is difficult to
+convey to critics, whether it is from thick description or big data.</p>
+
+      <!-- <img style="float: right; padding-right: 15px" src="images/wordcloud.png"
+height="200"  alt="word cloud"> -->
+
+
+<img src="{{ url_for('static', filename='img/wordcloud.png') }}" height="200" alt="word cloud">
+
+
+      <p>To emphasize both the interpretive responsibility of the analyst and the contextual aspects of the
+data, "interviewing data" is introduced as an assessment tool. It is the responsibility of the person using
+the data to identify inherent preferences and biases. Interviewing data is described as a
+series of journalistic questions that can be applied to understanding data. This approach is suitable for
+researchers with intimate access to the data set who need to convey its reliability.</p>
+      <p>This essay continues a strain of research that calls for increased attention to agency in big data
+analytics. Like naturalistic researchers, data analysts play a
+role in making decisions that impact the outcome, but often without accountability. Intellectual debate and
+scientific skepticism are hindered if those without access to the data have no way to evaluate the results.
+Interviewing data is one step towards challenging the assumption that all found data can be used without
+interpretation.   <a href="https://www.ideals.illinois.edu/bitstream/handle/2142/89433/Washington256.pdf?sequence=1">source</a>
+</p>
+<br>
+          <a href="#top">Top</a>
+        </main>
+<br>
+        <footer>
+          &copy;2018
+          <a href="7thnormal.com">7<sup>th</sup>normal.com</a> data exploratorium    contact: dennis&commat;7thnormal.com
+        </footer>
+  </body>
+</html>

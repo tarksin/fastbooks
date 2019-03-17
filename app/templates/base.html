@@ -7,6 +7,11 @@
 	<!-- <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<style>
+  .error {
+    color: red; font-size: 1.0em
+    }
+    </style>
 </head>
 
 
@@ -29,8 +34,7 @@
          </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-
-
+{% if session['logged_in'] %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Finances
@@ -38,14 +42,17 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{{ url_for('add_expense') }}">Add expense</a>
                   <a class="dropdown-item" href="{{ url_for('expenses') }}">List expenses</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ url_for('get_sales_tax') }}">Sales tax finder</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ url_for('add_bankitem') }}">Add bankitem</a>
                   <a class="dropdown-item" href="{{ url_for('bankitems') }}">List bankitems</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="{{ url_for('expcats') }}">Expense categories</a>
+									<div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ url_for('report') }}">Reports</a>
                 </div>
               </li>
-
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,22 +66,36 @@
                   </div>
               </li>
 
-
+{% endif %}
 
             <ul class="nav navbar-nav navbar-right">
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
-              </li>
+
+        {% if session['logged_in'] %}
+
               <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
               </li>
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('register') }}">Register new user</a>
+              </li>
+
+        {% else %}
+
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
+              </li>
+
+        {% endif %}
+
+
             </ul>
 
           </div>
         </nav>
 
 <div class="content container">
-
+    <h4 style="color:firebrick;">Logged in: {{ session['logged_in'] }}</h4>
     <h1 style = "color:#006400; text-align: center;">{{ header_text }}</h1>
     <hr>
     {% with messages = get_flashed_messages() %}
@@ -86,6 +107,9 @@
     </ul>
     {% endif %}
     {% endwith %}
+
+
+
 {% block content %}
 
 {% endblock %}
@@ -94,9 +118,9 @@
 <br>
 <hr>
 <div>
-<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="250" heigth="50" alt="spacer">
+<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="225" heigth="50" alt="spacer">
 <img src="{{ url_for('static', filename='img/python.svg') }}" height="30" alt="python logo">
-<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="50" alt="spacer">
+<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="45" alt="spacer">
 <img src="{{ url_for('static', filename='img/mariadb-ar21.svg') }}" height="40" alt="mariadb logo">
 <img src="{{ url_for('static', filename='img/spacer.svg') }}" width="75" alt="spacer">
 <img src="{{ url_for('static', filename='img/flask.png') }}" height="30" alt="flask logo">
@@ -104,8 +128,14 @@
 <img src="{{ url_for('static', filename='img/aws.svg') }}" height="30" alt="aws logo">
 <img src="{{ url_for('static', filename='img/spacer.svg') }}" width="75" alt="spacer">
 <img src="{{ url_for('static', filename='img/bootstrap.svg') }}" height="30" alt="bootstrap logo">
-</div>
+<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="75" alt="spacer">
+<img src="{{ url_for('static', filename='img/git_logo.png') }}" height="35" alt="git logo">
+<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="75" alt="spacer">
+<img src="{{ url_for('static', filename='img/bitbucket.png') }}" height="25" alt="bitbucket logo">
+<img src="{{ url_for('static', filename='img/spacer.svg') }}" width="75" alt="spacer">
+<img src="{{ url_for('static', filename='img/avalara.png') }}" height="25" alt="bitbucket logo">
 
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>

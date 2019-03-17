@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Report</h2>
+  <form method="POST">
+              {{ form.hidden_tag() }}
+      <table>
+        <tr>
+          <td></td>
+          <td> {{ form.startdate.label }} </td>
+          <td> {{ form.startdate}}        </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>{{form.enddate.label }}  </td>
+          <td>{{ form.enddate}}       </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>{{ form.by_cat.label }}  </td>
+          <td>{{ form.by_cat }}       </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>{{ form.single_cat_id.label }}  </td>
+          <td>{{ form.single_cat_id }}       </td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td> {{ form.submit() }}  </td>
+        </tr>
+      <table>
+  </form>
+
+
+{% endblock %}

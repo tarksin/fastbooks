@@ -8,8 +8,8 @@
   <h4>1:  {{ group[0] }}</h4>
   <h6>2:  {{ group[1] }}</h6>
   <h3>3:  {{ group[1][0]['pid'] }}</h3> -->
-                    <!--     style="max-width: 18rem;" -->
-  <div class="card text-black bg-success mb-3" >
+
+  <div class="card text-black bg-success mb-3" style="max-width: 18rem;">
     <div class="card-body">
       <h6  style="font-color: black; font-style: bold; text-align: center;">{{ group.grouper}} </h6>
       <!-- { { group[1] [0][ 'pid'] }  } -->
@@ -23,6 +23,7 @@
 
   {% endfor %}
 </div>
+
 
 <img src="{{ url_for('static', filename='img/spacer.svg') }}" height="150" alt="spacer">
 

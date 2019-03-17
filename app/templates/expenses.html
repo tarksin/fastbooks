@@ -6,8 +6,8 @@
               <table class="table table-sm">
                 {% for expense in expense_list %}
                 <tr>
-                  <td>{{expense.expense_id}}</td>
-                  <td>{{expense.expdate}}</td>
+                  <td> {{expense.expense_id}}</td>
+                  <td> {{expense.expdate}}</td>
                   <td> {{expense.expdesc}}</td>
                   <td> {{expense.expamount}}</td>
                   <td> {{expense.vendor}}</td>
@@ -31,9 +31,8 @@
                 <td> {{bankitem.bi_date}}</td>
                 <td> {{bankitem.bi_amount}}</td>
                 <td> {{bankitem.vendor}}</td>
+              </tr>  
                 {% endfor %}
             <table>
-
-
 
 {% endblock %}
