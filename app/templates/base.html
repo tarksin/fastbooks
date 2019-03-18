@@ -76,14 +76,14 @@
                   <a class="nav-link" href="{{ url_for('logout') }}">Log out</a>
               </li>
 
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ url_for('register') }}">Register new user</a>
-              </li>
 
         {% else %}
 
               <li class="nav-item">
                   <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('register') }}">Register</a>
               </li>
 
         {% endif %}
@@ -100,11 +100,9 @@
     <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul>
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <h4 style="color:firebrick;">  {{ message }}</h4>
         {% endfor %}
-    </ul>
     {% endif %}
     {% endwith %}
 

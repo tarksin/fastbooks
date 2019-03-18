@@ -10,4 +10,12 @@
         {% endfor %}
       </ul>
 
+   <ul>
+        {% for link in links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.english}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+
 {% endblock %}

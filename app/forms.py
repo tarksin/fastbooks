@@ -71,6 +71,8 @@ class GetSalesTaxForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
+    firstname = StringField('First name', validators=[DataRequired()])
+    lastname = StringField('Last name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
     password = StringField('Password', validators=[DataRequired()])
     password2 = StringField('Repeat password', validators=[DataRequired(), EqualTo('password')])

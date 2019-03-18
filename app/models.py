@@ -1,13 +1,13 @@
 # from app import db, login
 import json
-from flask import jsonify
+from flask import jsonify, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 # from flask_login import UserMixin
 import pymysql.cursors
 import pymysql
 
 
-class Expense():
+class Expense:
     def __init__(self, expdate, expdesc, expamount, expcat, vendor):
         self.expdesc = expdesc
         self.expdate = expdate
@@ -18,8 +18,13 @@ class Expense():
     @classmethod
     def get_expenses(cls):
         the_expenses = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                 db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+
         try:
             with connection.cursor() as cursor:
                 sql = "SELECT e.expense_id,e.expdate, e.expdesc, e.expamount, ec.expcat, e.vendor FROM expenses e join expcats ec on (e.expcat = ec.id)  ORDER BY expdate DESC LIMIT 25" # WHERE  username='{}'".format(username)
@@ -37,8 +42,12 @@ class Expense():
 
 
     def create(self):
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
 # #                "INSERT INTO TABLE_A (COL_A,COL_B) VALUES (%s, %s)" % (val1, val2)
@@ -66,8 +75,12 @@ class Report():
     @classmethod
     def expense_report(cls,startdate, enddate):
         the_expenses = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = '''SELECT e.expense_id,e.expdate, e.expdesc, e.expamount, ec.expcat, e.vendor
@@ -83,8 +96,12 @@ class Report():
     @classmethod
     def expenses_single_cat(cls, startdate, enddate, single_cat_id):
         the_expenses = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = '''SELECT e.expense_id,e.expdate, e.expdesc, e.expamount, ec.expcat, e.vendor
@@ -102,8 +119,12 @@ class Report():
     @classmethod
     def expenses_by_cat(cls,startdate, enddate):
         the_cats = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = '''SELECT SUM(e.expamount) AS total, ec.expcat AS cat
@@ -130,8 +151,12 @@ class Todo():
         self.project_id = int(project_id)
 
     def create(self):
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = "INSERT INTO todo( todo, project_id) values(%s,%s)"
@@ -143,8 +168,12 @@ class Todo():
     @classmethod
     def get_todos(cls):
         todos = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 #sql = "SELECT id, todo FROM todo ORDER BY id" # WHERE  username='{}'".format(username)
@@ -167,8 +196,12 @@ class Project():
         self.project = project
 
     def create(self):
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = "INSERT INTO projects( project) values (%s)"
@@ -180,8 +213,12 @@ class Project():
     @classmethod
     def get_projects(cls):
         projects = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 #sql = "SELECT id, todo FROM todo ORDER BY id" # WHERE  username='{}'".format(username)
@@ -205,8 +242,12 @@ class Expcat():
         self.expcat = expcat
 
     def create(self):
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = "INSERT INTO expcats(id, expcat) values(%s,%s)"
@@ -248,8 +289,12 @@ class BankItem():
         self.vendor = vendor
 
     def create(self):
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                         db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                         db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
                 sql = "INSERT INTO bankitems(bi_date,bank_id, bi_amount, vendor) values(%s,%s,%s,%s)"
@@ -261,8 +306,13 @@ class BankItem():
     @classmethod
     def get_bankitems(cls):
         bankitems = []
-        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
-                                db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        if session['logged_in'] == 'xumi':
+            connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                 db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        else:
+            connection = pymysql.connect(host='localhost', user='demo', password='xnynzn987',
+                                db='fb_demo', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+
         try:
             with connection.cursor() as cursor:
                 sql = "SELECT bankitem_id, bi_date, bi_amount, bank_id, vendor FROM bankitems ORDER BY bi_date DESC LIMIT 25" # WHERE  username='{}'".format(username)
@@ -286,13 +336,12 @@ class User:
     # username = db.Column(db.String(64), index=True, unique=True)
     # email = db.Column(db.String(120), index=True, unique=True)
     # password_hash = db.Column(db.String(128))
-    def __init__(self, username,email, password):
+    def __init__(self, username, firstname, lastname, email, pw_hash):
         self.username = username
-        self.email= email
-        self.password_hash = generate_password_hash(password)  # pwhash #db.Column(db.String(128))
-        # self.password = password
-        # generate_password_hash, \
-        # check_password_hash
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.password_hash = pw_hash
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -302,8 +351,8 @@ class User:
                                 db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
-                sql = "INSERT INTO users(username, email, password_hash) values(%s,%s,%s)"
-                cursor.execute(sql,(self.username, self.email, self.password_hash))
+                sql = "INSERT INTO users(first_name, last_name, username, email, password_hash) values(%s,%s,%s,%s,%s)"
+                cursor.execute(sql,(self.firstname, self.lastname, self.username, self.email, self.password_hash))
                 connection.commit()
         finally:
             connection.close()
@@ -336,21 +385,30 @@ class User:
 #------------------------------------------------------
 #User.find_username(form.username.data)
     @classmethod
-    def check_user_exists(cls, username):
+    def user_exists(cls, username):
         connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
                                     db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
         try:
             with connection.cursor() as cursor:
-                sql = "SELECT username, COUNT(*) FROM users WHERE username = %s GROUP BY username"
-
+                sql = "SELECT EXISTS(SELECT * FROM users WHERE username = %s) AS r"
                 cursor.execute(sql, (username))
-                rc = cursor.rowcount
-                result = not rc == 0
-                return result
-                # if len(result) > 0:
-                #     return False #   result["username"]
-                # else:
-                #     return False
+                x = cursor.fetchone()
+                # flash('M 396')
+                # flash(x)  # {'r':1}
+                # flash('M 400')
+                # flash(x['r'] == 1)  #  True
+                # flash('M 404')
+
+                # english = json.loads(data_u)
+                # flash('M 402')
+                # english['maxx'] = 'A @ 373'
+   #======================================================
+                # sql = "SELECT username, COUNT(*) FROM users WHERE username = %s GROUP BY username"
+
+                # cursor.execute(sql, (username))
+                # rc = cursor.rowcount
+                # result = not rc == 0
+                return x['r'] == 1
         finally:
             connection.close()
 
@@ -369,6 +427,40 @@ class User:
                 return result
         finally:
             connection.close()
+
+    # ------------------- get_id----------------------------------
+    @classmethod
+    def get_id(cls, username):
+        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                     db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        try:
+            with connection.cursor() as cursor:
+                sql = "SELECT id FROM users WHERE username = %s"
+                cursor.execute(sql,(username))
+                result = cursor.fetchone()
+              #  flash('M444')
+                flash(result)
+                return result['id']
+        finally:
+            connection.close()
+
+# ------------------- get_pwhash----------------------------------
+    @classmethod
+    def get_pwhash(cls, username):
+        connection = pymysql.connect(host='localhost', user='maxxblog', password='xnynzn987',
+                                     db='fastbooks', charset='utf8mb4', cursorclass=pymysql.cursors.DictCursor)
+        try:
+            with connection.cursor() as cursor:
+                sql = "SELECT password_hash FROM users WHERE username = %s"
+                cursor.execute(sql,(username))
+                result = cursor.fetchone()
+                # flash('M461')
+                # flash(result)
+                return result['password_hash']
+        finally:
+            connection.close()
+
+
 
 #------------------- check_password_exists----------------------------------
     @classmethod
